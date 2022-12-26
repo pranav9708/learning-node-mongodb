@@ -1,12 +1,23 @@
 const User = require('../models/User');
 
 module.exports.profile = function (req, res) {
-    return res.end('<h1>User Profile!</h1>');
-}
+    if(req.cookies.user_id){
+        User.findById(req.cookies.user_id,function (err, user) {
+            if(err){
+                console.log(`error in finding the user with id: ${req.cookie.user_id}`);
+            }
 
-// module.exports.post= function(req, res){
-//     return res.end('<h1>User Posts!</h1>');
-// }
+            if(user){
+                res.render('profile',{
+                    title: 'UserProfile',
+                    user: user
+                })
+            }
+        })
+    }else{
+        res.redirect('/users/sign-in');
+    }
+}
 
 module.exports.signIn = function (req, res) {
     return res.render('user_sign_in', {

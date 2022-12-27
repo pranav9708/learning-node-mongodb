@@ -1,7 +1,9 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
+//to fetch Users from DB
 const User = require('../models/User');
+
 //authentication using passport
 passport.use(new LocalStrategy(
     {

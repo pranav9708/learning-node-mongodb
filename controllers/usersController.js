@@ -91,7 +91,7 @@ module.exports.createSession = function (req, res) {
 
 module.exports.signOut = function(req,res){
     if(req.cookies.user_id){
-        req.cookies.user_id ="";
+        res.cookie('user_id',"");
         res.redirect('back');
     }else{
         console.log("couldn't find userID")

@@ -23,7 +23,7 @@ passport.use(new LocalStrategy(
                 console.log('Invalid Username/password');
                 return done(null, false);
             }
-
+            //return to serialzeUSer 
             return done(null, user);
         })
 
@@ -32,7 +32,7 @@ passport.use(new LocalStrategy(
 
 //serializing the user to decide which key is to be kept in the cookies
 passport.serializeUser(function (user, done) {
-    done(null, user.id);//automatically encrypts userid
+    done(null, user.id);//takes in user.id and encrypts it using express session in main index.js
 });
 
 //deserializing the user from the key in the cookies

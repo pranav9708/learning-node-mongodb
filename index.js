@@ -31,7 +31,9 @@ app.use(session({
     // TODO change secret during deployment
     // key used to encrypt cookie
     secret: 'blah',
+    //to avoid saving session cookie when user not logged in
     saveUninitialized: false,
+    //prevent saving same cookie again and again
     resave: false,
     cookie:{
         maxAge:(1000 *60 *100)
@@ -41,6 +43,8 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
 
 app.use('/',require('./routes'));
 

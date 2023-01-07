@@ -24,12 +24,14 @@ app.use(sassMiddleware({
     outputStyle: 'extended',
     prefix: '/css'
 }))
+
 app.use(express.urlencoded());
 
 app.use(cookieParser());
 
 app.use(express.static('./assets'));
 app.use(expressLayout);
+
 
 //extracting static files
 app.set('layout extractStyles',true);

@@ -11,7 +11,16 @@ module.exports.home = function(req,res){
     // })
 
     //populate each user of post(add more info to user variable other than id)
-    Post.find({}).populate('user').exec(function(err, posts){
+    Post.find({})
+    .populate('user')
+    //path is used for populating from multiple models
+    .populate({
+        path: 'comments',
+        populate:{
+            path:'user'
+        }
+    })
+    .exec(function(err, posts){
         return res.render('home', {
             title: "Codeial",
             posts:  posts

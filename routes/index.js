@@ -13,6 +13,6 @@ route.use('/users',require('./users'));
 route.use('/posts',require('./posts'));
 
 // route.get('/profile', homeController.profile);
-
+route.use('/comments', require('./comments'));
 
 module.exports =route;

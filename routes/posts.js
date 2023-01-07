@@ -1,8 +1,10 @@
 const express = require('express');
 const route= express.Router();
+const passport = require('passport');
 
 const postController= require('../controllers/postController');
 
-route.post('/create',postController.create);
+//check to not allow anyone to change html to add form
+route.post('/create',passport.checkAuthentication,postController.create);
 
 module.exports = route;

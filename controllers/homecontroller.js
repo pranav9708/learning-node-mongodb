@@ -1,18 +1,11 @@
 const Post= require('../models/Post');
 const User= require('../models/User');
 
-module.exports.home = function(req,res){
-    // console.log(req.cookies)
-    // res.cookie('user_id',25);
-    // Post.find({},function(err,posts){
-    //     return res.render('home',{
-    //         title : "Codeial | Home",
-    //         posts: posts
-    //     });
-    // })
+module.exports.home = async function(req,res){
 
-    //populate each user of post(add more info to user variable other than id)
-    Post.find({})
+    try{
+        //populate each user of post(add more info to user variable other than id)
+    let posts= await Post.find({})
     .populate('user')
     //path is used for populating from multiple models
     .populate({
@@ -20,19 +13,18 @@ module.exports.home = function(req,res){
         populate:{
             path:'user'
         }
-    })
-    .exec(function(err, posts){
+    });
 
-        User.find({}, function(err, users){
-            return res.render('home', {
-                title: "Codeial",
-                posts:  posts,
-                all_users: users
-            });
-        })
-    })
+    let users=await  User.find({})
+    
+    return res.render('home', {
+        title: "Codeial",
+        posts:  posts,
+        all_users: users
+    });
+    }catch(err){
+       console.log('Error',err);
+       return;
+    }
+    
 }
-
-// module.exports.profile = function(req,res){
-//     return res.end('<h1>You are now in profile page!</h1>');
-// }

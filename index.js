@@ -6,6 +6,7 @@ const port =8000;
 const expressLayout= require('express-ejs-layouts');
 
 
+
 const db= require('./config/mongoose');
 const session = require('express-session');
 const passport =require('passport');
@@ -15,6 +16,9 @@ const passportLocal = require('./config/passport-local-statergy');
 const MongoStore = require('connect-mongo');
 
 const sassMiddleware = require('node-sass-middleware');
+const flash=require('connect-flash');
+const custommware= require('./config/middleware');
+
 
 //need to be mentioned before server starts
 app.use(sassMiddleware({
@@ -69,6 +73,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
+
+app.use(flash());
+app.use(custommware.setFlash);
 
 app.use('/',require('./routes'));
 

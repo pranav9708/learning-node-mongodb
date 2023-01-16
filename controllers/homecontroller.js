@@ -6,6 +6,7 @@ module.exports.home = async function(req,res){
     try{
         //populate each user of post(add more info to user variable other than id)
     let posts= await Post.find({})
+    .sort('-createdAt')
     .populate('user')
     //path is used for populating from multiple models
     .populate({

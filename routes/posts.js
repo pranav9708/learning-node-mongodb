@@ -1,12 +1,10 @@
 const express = require('express');
-const route= express.Router();
-const passport = require('passport');
+const router = express.Router();
+const passport=require('passport');
 
-const postController= require('../controllers/postController');
+const postsController = require('../controllers/posts_controller');
 
-//check to not allow anyone to change html to add form
-route.post('/create',passport.checkAuthentication,postController.create);
+router.post('/create',passport.checkAuthentication, postsController.create);
+router.get('/destroy/:id',passport.checkAuthentication, postsController.destroy);
 
-route.get('/destroy/:id', passport.checkAuthentication,postController.destroy);
-
-module.exports = route;
+module.exports = router;

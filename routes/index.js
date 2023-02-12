@@ -1,18 +1,18 @@
-const express=require('express');
-const route=express.Router();
-const homeController = require('../controllers/homecontroller');
+const express = require('express');
+
+const router = express.Router();
+const homeController = require('../controllers/home_controller');
 
 console.log('router loaded');
 
-route.get('/', homeController.home);
 
-//specific to use users.js for any route after /users.
-route.use('/users',require('./users'));
+router.get('/', homeController.home);
+router.use('/users', require('./users'));
+router.use('/posts', require('./posts'));
+router.use('/comments', require('./comments'));
 
-//specific to use posts.js for any route after /posts.
-route.use('/posts',require('./posts'));
+// for any further routes, access from here
+// router.use('/routerName', require('./routerfile));
 
-// route.get('/profile', homeController.profile);
-route.use('/comments', require('./comments'));
 
-module.exports =route;
+module.exports = router;

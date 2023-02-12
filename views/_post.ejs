@@ -1,11 +1,7 @@
 <li id="post-<%=post._id%>">
     <p>
-        <%if(locals.user && locals.user.id==post.user.id){%>
-            <small>
-                <!-- class is added so that we can add common styling and add clicklistener -->
-                <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">X</a>
-                <br>
-            </small>
+        <% if(locals.user && locals.user.id==post.user.id){ %>
+            <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">X</a>
             <%}%>
                 <%= post.content %>
                     <br>
@@ -14,20 +10,21 @@
                     </small>
     </p>
     <div class="post-comments">
-        <% if (locals.user){%>
-            <form action="/comments/create" method="POST">
-                <input type="text" name="content" placeholder="Type here to add comment" required>
-                <input type="hidden" name="post" value="<%= post._id %>">
-                <input type="submit" value="Add comment">
+        <%if (locals.user){%>
+            <form id="post-<%= post._id %>-comments-form" action="/comments/create" method="POST">
+                <textarea name="content" cols="20" rows="2" placeholder="add comment.." required></textarea>
+                <input type="hidden" name="post" value="<%=post._id%>">
+                <input type="submit" value="Add">
             </form>
-            <%}%>
+        <%}%>
 
-                <div class="post-comments-list">
-                    <ul id="post-comments-<%= post._id %>">
-                        <% for (comment of post.comments){%>
-                            <%-include('_comment');-%>
-                                <%}%>
-                    </ul>
-                </div>
+        <div class="post-comments-list">
+            <ul id="post-comments-<%=post._id%>">
+                <% for(comment of post.comments){%>
+                    <%- include('_comment') -%>
+                        <%}%>
+            </ul>
+
+        </div>
     </div>
 </li>

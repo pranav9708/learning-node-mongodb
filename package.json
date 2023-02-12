@@ -1,7 +1,7 @@
 {
   "name": "codeial",
   "version": "1.0.0",
-  "description": "My all social web application",
+  "description": "My all social media web application",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
@@ -10,7 +10,7 @@
   "keywords": [
     "social"
   ],
-  "author": "Pranav V",
+  "author": "CodingNinjas",
   "license": "ISC",
   "dependencies": {
     "connect-flash": "^0.1.1",

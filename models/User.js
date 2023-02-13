@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const multer= require('multer');
 const path = require('path');
+//file that we are uploading will be stored
 const AVATAR_PATH=path.join('/uploads/users/avatar')
 
 const userSchema = new mongoose.Schema({
@@ -18,6 +19,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     avatar:{
+        //path of the file is stored as string
         type: String,
         
     }
@@ -25,6 +27,7 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 });
 
+//define storage properties for multer
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, path.join(__dirname, '..',AVATAR_PATH));
@@ -35,7 +38,7 @@ let storage = multer.diskStorage({
     }
   })
 
-  //static functions
+  //static functions(making publically available)
   userSchema.statics.uploadedAvatar = multer({storage: storage}).single('avatar');
   userSchema.statics.avatarPath= AVATAR_PATH;
 

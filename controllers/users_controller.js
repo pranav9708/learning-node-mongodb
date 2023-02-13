@@ -85,15 +85,7 @@ module.exports.destroySession = function(req, res){
 }
 
 module.exports.update= async function(req, res){
-    // if(req.user.id==req.params.id){
-    //     User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
-    //         req.flash('success','Updated!');
-    //         return res.redirect('back');
-    //     })
-    // }else{
-    //     req.flash('error','unauthorized');
-    //     return res.status(401).send('Unauthorized')
-    // }
+    
     if(req.user.id==req.params.id){
         try{
             let user = await User.findById(req.params.id);

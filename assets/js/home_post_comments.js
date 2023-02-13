@@ -15,11 +15,11 @@ class PostComments{
 
     createComment(postId){
         console.log('inside createComment');
-        //check - this refers to class postComment
+        
         let pSelf=this;
         this.newCommentForm.submit(function(e){
             e.preventDefault();
-            //check - this refers to newCommentForm
+            
             let self=this;
 
             $.ajax({

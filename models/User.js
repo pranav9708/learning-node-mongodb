@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const multer= require('multer');
+const path = require('path');
+const AVATAR_PATH=path.join('/uploads/users/avatar')
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -13,6 +16,10 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    avatar:{
+        type: String,
+        
     }
 }, {
     timestamps: true

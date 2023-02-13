@@ -7,7 +7,7 @@ const db = require('./config/mongoose');
 // used for session cookie
 const session = require('express-session');
 const passport = require('passport');
-const passportLocal = require('./config/passport-local-strategy');
+const passportLocal = require('./config/passport-local-statergy');
 const MongoStore = require('connect-mongo');
 const sassMiddleware =require('node-sass-middleware');
 const flash = require('connect-flash');

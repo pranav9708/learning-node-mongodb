@@ -2,7 +2,7 @@ class PostComments{
     constructor(postId){
         this.postId = postId;
         this.postContainer = $(`#post-${postId}`);
-        this.newCommentForm = $(`#post-${postId}-comment-form`);
+        this.newCommentForm = $(`#post-${postId}-comments-form`);
 
         this.createComment(postId);
 

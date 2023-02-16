@@ -14,7 +14,7 @@ module.exports.createSession =async function(req, res){
             message:"Sign in Successful,here is your token, please keep it safe!",
             data:{
                 //codeial mentioned in passportjwt statergy
-                token: jwt.sign(user.toJSON(),'codeial',{expiresIn:'10000'})
+                token: jwt.sign(user.toJSON(),'codeial',{expiresIn:'1000000'})
             }
         })
     }catch (err) {

@@ -3,6 +3,8 @@ const User = require('../models/user');
 
 module.exports.home = async function(req, res){
     try{
+
+        //populate likes of each post and comment
         let posts=await Post.find({})
             .sort('-createdAt')
             .populate('user')
@@ -11,17 +13,20 @@ module.exports.home = async function(req, res){
                 populate:{
                     path:'user'
                 },
+                populate:{
+                    path: 'Likes'
+                },
                 options:{
                     sort:{
                         createdAt: -1
                     }
                 }
-            });
+            }).populate('comments').populate('likes');
 
         let users=await User.find({});
         
         return res.render('home', {
-            title: "Home",
+            title: "Codeial | Home",
             posts: posts,
             all_users: users
         });

@@ -4,6 +4,7 @@ const path=require('path');
 const resetEmailWorker = require('../workers/resetPassword_worker');
 const Token=require('../models/token');
 const queue = require('../config/kue');
+const { response } = require('express');
 
 module.exports.profile = function(req, res){
     User.findById(req.params.id,function(err,user){
@@ -144,4 +145,19 @@ module.exports.resetPassword= async function(req,res){
     res.render('reset_email_sent',{
         title:'Mail Inbox'
     });
+}
+
+module.exports.changePassword=async function(req,res){
+    let token =await Token.findById(req.params.id);
+    if(!token || token.isValid ==false){
+        res.render('user_sign_in.ejs',{
+            title:'signIn'
+        })
+        return;
+    }else{
+        await Token.findByIdAndUpdate(req.params.id,{isValid:false});
+        res.render('change_password',{
+            title:'changePassword'
+        })
+    }
 }

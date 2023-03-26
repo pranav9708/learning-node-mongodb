@@ -161,3 +161,25 @@ module.exports.changePassword=async function(req,res){
         })
     }
 }
+
+
+module.exports.updatePassword = async function (req, res) {
+    if(req.body.password != req.body.confirmPassword){
+        console.log("password not matching");
+        return res.redirect('back');
+    }
+    let user = await User.findOne({email:req.body.email});
+    if(!user){
+        res.render('user_sign_up',{
+            title:'signUp'
+        })
+        return;
+    }else{
+        console.log(user);
+        await User.findByIdAndUpdate(user.id,{password:req.body.password});
+        console.log("***changed password***");
+        res.render('user_sign_in',{
+            title:'SignIn'
+        })
+    }
+}

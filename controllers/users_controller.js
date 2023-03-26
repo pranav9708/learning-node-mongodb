@@ -1,7 +1,9 @@
 const User = require('../models/user');
 const fs=require('fs');
 const path=require('path');
-
+const resetEmailWorker = require('../workers/resetPassword_worker');
+const Token=require('../models/token');
+const queue = require('../config/kue');
 
 module.exports.profile = function(req, res){
     User.findById(req.params.id,function(err,user){
@@ -119,4 +121,27 @@ module.exports.update= async function(req, res){
         req.flash('error','unauthorized');
         return res.status(401).send('Unauthorized')
     }
+}
+
+module.exports.forgotPassword=function(req,res){
+    res.render('forgot_password',{
+        title:'Reset password'
+    });
+}
+
+module.exports.resetPassword= async function(req,res){
+    let user=await User.findOne({email:req.body.email});
+
+    let token =await Token.create({isValid:true,user:user})
+    let job=queue.create('reset',token).save(function(err){
+        if(err){
+            console.log('error in creating queue',err);
+            return;
+        }
+        console.log('enqueued',job.id);
+    });
+
+    res.render('reset_email_sent',{
+        title:'Mail Inbox'
+    });
 }

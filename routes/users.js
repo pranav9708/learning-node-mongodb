@@ -8,7 +8,8 @@ router.get('/profile/:id', passport.checkAuthentication, usersController.profile
 
 router.get('/sign-up', usersController.signUp);
 router.get('/sign-in', usersController.signIn);
-
+router.get('/forgot-password', usersController.forgotPassword);
+router.post('/reset-password', usersController.resetPassword);
 
 router.post('/create', usersController.create);
 router.post('/update/:id', usersController.update);

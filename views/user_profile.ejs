@@ -13,4 +13,18 @@
         <%}else{%>
             <p><%= profile_user.name %></p>
             <p><%= profile_user.email %></p>
+            <% if(friends == false){%>
+                <a id="friend-link" href="/friends/toggle/?id=<%=profile_user.id%>">
+                    <div id="toggle-friend">
+                        add friend
+                    </div>
+                </a>
+            <%}else{%>
+                <a id="friend-link" href="/friends/toggle/?id=<%=profile_user.id%>">
+                    <div id="toggle-friend">
+                        remove friend
+                    </div>
+                </a>
+            <%}%>
         <%}%>
+        <script src="/js/toggle_friend.js"></script>

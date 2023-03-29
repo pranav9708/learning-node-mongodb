@@ -5,14 +5,27 @@ const resetEmailWorker = require('../workers/resetPassword_worker');
 const Token=require('../models/token');
 const queue = require('../config/kue');
 const { response } = require('express');
+const FriendShip=require('../models/friendship');
 
-module.exports.profile = function(req, res){
-    User.findById(req.params.id,function(err,user){
+module.exports.profile =async function(req, res){
+    try{
+    
+        let user=await User.findById(req.params.id);
+        let friend1=await FriendShip.findOne({from_user:req.params.id, to_user:req.user.id});
+        let friend2=await FriendShip.findOne({to_user:req.params.id, from_user:req.user.id});
+
+        let friends=false;
+        if(friend1||friend2)friends=true;
+
         return res.render('user_profile', {
             title: 'User Profile',
-            profile_user:user
-        })
-    })
+            profile_user:user,
+            friends:friends
+        });
+
+    }catch(err){
+        console.log(err);
+    }
 }
 
 

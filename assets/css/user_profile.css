@@ -1,2 +1,12 @@
 body {
   background-color: lightblue; }
+
+#friend-link {
+  text-decoration: none; }
+
+#toggle-friend {
+  background-color: blue;
+  color: white;
+  padding: 1em;
+  margin: 0.5em;
+  display: inline; }

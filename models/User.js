@@ -22,7 +22,11 @@ const userSchema = new mongoose.Schema({
         //path of the file is stored as string
         type: String,
         
-    }
+    },
+    friendships:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'friendship'
+    }]
 }, {
     timestamps: true
 });
